@@ -137,4 +137,59 @@ Humanoid.prototype = Object.create(CharacterStats.prototype)
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
 
+  function Villain(properties) {
+    Humanoid.apply(this, [properties]);
+    this.killHealthPoints = function(points = 1) {
+      this.healthPoints = this.healthPoints - points;
+      return this.healthPoints;
+    }
 
+  }
+  Villain.prototype = Object.create(Humanoid.prototype)
+
+  function Hero(properties) {
+    Humanoid.apply(this, [properties]);
+    this.removeHealthPoints = function(points = 1) {
+      this.healthPoints = this.healthPoints - points;
+      return this.healthPoints;
+    }
+  }
+  Villain.prototype = Object.create(Humanoid.prototype)
+
+  const vivi = new Villain({
+    createdAt: new Date(),
+    dimensions: {
+      length: 4,
+      width: 7,
+      height: 2,
+    },
+    healthPoints: 10,
+    name: 'Lilith',
+    team: 'Forest Kingdom',
+    weapons: [
+      'Bow',
+      'Dagger',
+    ],
+    language: 'Elvish',
+  });
+
+  const hihi = new Hero({
+    createdAt: new Date(),
+    dimensions: {
+      length: 4,
+      width: 8,
+      height: 1,
+    },
+    healthPoints: 10,
+    name: 'Lilith',
+    team: 'Forest Kingdom',
+    weapons: [
+      'Bow',
+      'Dagger',
+    ],
+    language: 'Elvish',
+  });
+
+  console.log(vivi.killHealthPoints())
+
+  console.log(hihi.removeHealthPoints())
